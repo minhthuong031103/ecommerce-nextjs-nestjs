@@ -1,13 +1,10 @@
-import { store } from '@/redux/store';
 import { Inter } from 'next/font/google';
-import { Provider } from 'react-redux';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import 'bootstrap/dist/css/bootstrap.css'; // Add this line
+import MyNavbar from './components/MyNavbar';
+import MyFooter from './components/MyFooter';
+import { Providers } from '@/redux/provider';
+import Cart from './components/Cart';
 const inter = Inter({ subsets: ['latin'] });
-
-export const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
-  cache: new InMemoryCache(),
-});
 
 export const metadata = {
   title: 'Create Next App',
@@ -21,11 +18,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Provider store={store}>
-        <ApolloProvider client={client}>
-          <body className={inter.className}>{children}</body>
-        </ApolloProvider>
-      </Provider>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        />
+      </head>
+
+      <Providers>
+        <body className={inter.className}>
+          <MyNavbar />
+          <Cart />
+          {children}
+          <MyFooter />
+        </body>
+      </Providers>
     </html>
   );
 }

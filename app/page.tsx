@@ -1,6 +1,14 @@
-import Image from 'next/image';
-import styles from './page.module.css';
+import { getClient } from '@/lib/client';
+import { getProducts } from '@/graphql/getProducts.query';
 
-export default function Home() {
-  return <div>ok dc chua </div>;
+import ProductsShow from './components/ProductsShow';
+export default async function Home() {
+  const client = getClient();
+  const { data, error, loading } = await client.query({ query: getProducts });
+
+  return (
+    <div>
+      <ProductsShow data={data} />
+    </div>
+  );
 }
