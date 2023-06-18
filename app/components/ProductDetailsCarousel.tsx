@@ -23,7 +23,7 @@ export default function ProductDetailsCarousel() {
         infiniteLoop={true}
         showIndicators={false}
         showStatus={false}
-        thumbWidth={60}
+        thumbWidth={90}
         className="productCarousel"
       >
         <img

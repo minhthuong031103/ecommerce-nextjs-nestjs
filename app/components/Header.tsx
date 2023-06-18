@@ -46,7 +46,7 @@ export default function Header() {
   ${show}
   `}
     >
-      <Wrapper className="h-[60px] flex justify-between items-center">
+      <Wrapper className="h-[60px] md:px-5 !px-3 flex justify-between items-center">
         <Link href={'/'}>
           <Image
             alt="logo"
