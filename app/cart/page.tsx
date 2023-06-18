@@ -25,7 +25,7 @@ export default function page() {
           <div className="flex-[1]">
             <div className="text-lg font-bold ">Summary</div>
             <div className="p-3 my-3 bg-black/[0.05] rounded-xl">
-              <div className="flex justify-between ">
+              <div className="flex justify-between gap-3 flex-wrap ">
                 <div className="uppercase text-md md:text-lg font-medium text-black">
                   Subtotal
                 </div>
