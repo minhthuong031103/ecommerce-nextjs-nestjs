@@ -11,7 +11,8 @@ export default function ProductCard() {
       href={'/product/1'}
     >
       <Image
-        className="w-full"
+        width={500}
+        height={500}
         src={productImage}
         priority
         quality={100}
