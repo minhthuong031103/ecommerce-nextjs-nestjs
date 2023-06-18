@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -11,8 +13,8 @@ export default function ProductCard() {
       href={'/product/1'}
     >
       <Image
-        width={500}
-        height={500}
+        width={700}
+        height={700}
         src={productImage}
         priority
         quality={100}
@@ -23,10 +25,8 @@ export default function ProductCard() {
         <div className="flex items-center text-black/[0.5]">
           <p className="mr-2 text-lg font-semibold ">$20.00</p>
           <p className="text-base font-medium line-through ">$25.00</p>
-          <p className="ml-auto text-base font-medium text-green-500">
-            20% off
-          </p>
         </div>
+        <p className="ml-auto text-base font-medium text-green-500">20% off</p>
       </div>
     </Link>
   );
