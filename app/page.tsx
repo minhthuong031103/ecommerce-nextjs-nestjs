@@ -7,8 +7,9 @@ export default async function Home() {
   const { data, error, loading } = await client.query({ query: getProducts });
 
   return (
-    <div>
-      <ProductsShow data={data} />
+    <div className="font-bold underline">
+      {/* <ProductsShow data={data} /> */}
+      ok
     </div>
   );
 }
