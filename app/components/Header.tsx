@@ -75,7 +75,7 @@ export default function Header() {
                   items-center hover:bg-black/[0.05] cursor-pointer relative
 "
           >
-            <IoMdHeartEmpty className="text-[15px] md:text-[24px]" />
+            <IoMdHeartEmpty className="text-[25px] md:text-[28px]" />
             <div
               className="h-[14px] md:h-[18px] min-w-[14px] 
             md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 
@@ -94,7 +94,7 @@ export default function Header() {
                   items-center hover:bg-black/[0.05] cursor-pointer relative
 "
             >
-              <BsCart className="text-[15px] md:text-[20px]" />
+              <BsCart className="text-[23px] md:text-[25px]" />
               <div
                 className="h-[14px] md:h-[18px] min-w-[14px] 
             md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 
@@ -119,12 +119,12 @@ export default function Header() {
           >
             {mobileMenu ? (
               <VscChromeClose
-                className="text-[16px]"
+                className="text-[25px]"
                 onClick={() => setMobileMenu(false)}
               ></VscChromeClose>
             ) : (
               <BiMenuAltRight
-                className="text-[20px]"
+                className="text-[25px]"
                 onClick={() => setMobileMenu(true)}
               ></BiMenuAltRight>
             )}
