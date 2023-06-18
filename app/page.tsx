@@ -5,8 +5,8 @@ import Wrapper from './components/Wrapper';
 import ProductCard from './components/ProductCard';
 
 export default async function Home() {
-  const client = getClient();
-  const { data, error, loading } = await client.query({ query: getProducts });
+  // const client = getClient();
+  // const { data, error, loading } = await client.query({ query: getProducts });
 
   return (
     <main>
