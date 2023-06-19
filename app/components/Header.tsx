@@ -13,11 +13,12 @@ import { BiMenuAltRight } from 'react-icons/bi';
 import { VscChromeClose } from 'react-icons/vsc';
 import MenuMobile from './MenuMobile';
 
-export default function Header() {
+export default function Header({ data }) {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
   const [show, setShow] = useState('translate-y-0');
   const [lastScrollY, setLastScrollY] = useState(0);
+  const categories = data;
   const controlNavbar = () => {
     if (window.scrollY > 200) {
       if (window.scrollY > lastScrollY && !mobileMenu) {
@@ -55,9 +56,14 @@ export default function Header() {
             className=" xs:w-[40px] md:w-[60px]"
           ></Image>
         </Link>
-        <Menu showCatMenu={showCatMenu} setShowcatMenu={setShowCatMenu} />
+        <Menu
+          categories={categories}
+          showCatMenu={showCatMenu}
+          setShowcatMenu={setShowCatMenu}
+        />
         {mobileMenu && (
           <MenuMobile
+            categories={categories}
             showCatMenu={showCatMenu}
             setShowcatMenu={setShowCatMenu}
             setMobileMenu={setMobileMenu}

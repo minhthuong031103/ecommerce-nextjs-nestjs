@@ -17,9 +17,11 @@ const subMenuData = [
 export default function Menu({
   showCatMenu,
   setShowcatMenu,
+  categories,
 }: {
   showCatMenu: boolean;
   setShowcatMenu: Function;
+  categories: any;
 }) {
   return (
     <ul
@@ -45,11 +47,11 @@ export default function Menu({
                   min-w-[250px] px-1 py-1 text-black shadow-lg 
                   "
                   >
-                    {subMenuData.map((subMenu) => {
+                    {categories.map((category) => {
                       return (
                         <Link
-                          href={'/'}
-                          key={subMenu.id}
+                          href={`/category/${category.slug}`}
+                          key={category.slug}
                           onClick={() => setShowcatMenu(false)}
                         >
                           <li
@@ -57,9 +59,9 @@ export default function Menu({
                           items-center px-3 hover:bg-black/[0.03] rounded-md
                           "
                           >
-                            {subMenu.name}
+                            {category.name}
                             <span className="opacity-50 text-sm ">
-                              {subMenu.doc_count}
+                              {`(${category.Product.length})`}
                             </span>
                           </li>
                         </Link>

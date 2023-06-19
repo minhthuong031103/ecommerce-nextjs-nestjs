@@ -2,24 +2,37 @@
 
 import React from 'react';
 import { IoMdHeartEmpty } from 'react-icons/io';
-
-export default function ProductDetailRight() {
+import { getDiscountedPricePercentage } from '../utils/helper';
+import numeral from 'numeral';
+export default function ProductDetailRight({ data }) {
+  const [selectedSize, setSizeSelected] = React.useState(-1);
   return (
     <div className="flex-[1] py-3">
       {/* Product Title */}
       <div className="text-[34px] font-semibold mb-2 leading-tight">
-        Jordan retro 6 G
+        {data.name}
       </div>
 
       {/* Product Subtitle */}
-      <div className="text-lg font-semibold mb-5">Men&apos;s Golf Shoes</div>
+      <div className="text-lg font-semibold mb-5">{data.subtitle}</div>
 
       {/* Product Price */}
-      <div className="text-lg font-semibold ">1.000.000 VND</div>
-      <div className="text-md font-medium text-black/[0.5] ">include taxes</div>
-      <div className="text-md font-medium text-black/[0.5] mb-20 ">
-        {`(Also available in 3 installments of 333.333 VND)`}
+      <div className="text-lg font-semibold ">
+        {numeral(data.price).format('0,0')} VND
       </div>
+
+      {data.original_price && (
+        <div>
+          <p className="text-base font-medium line-through ">
+            {numeral(data.original_price).format('0,0')} VND
+          </p>
+          <p className="ml-auto text-base font-medium text-green-500">
+            {' '}
+            {getDiscountedPricePercentage(data.original_price, data.price)}% off
+          </p>
+        </div>
+      )}
+      <div className="text-md font-medium text-black/[0.5] ">{`(include taxes)`}</div>
 
       {/* Product size */}
 
@@ -35,48 +48,23 @@ export default function ProductDetailRight() {
 
         {/* Size start */}
         <div className="grid grid-cols-3 gap-2">
-          <div
-            className="border-2 rounded-md text-center py-2.5 font-medium
-                   hover:bg-slate-300 
-                     cursor-pointer "
-          >
-            UK 6
-          </div>
-          <div
-            className="border-2 rounded-md text-center py-2.5 font-medium
-                   hover:bg-slate-300 
-                     cursor-pointer "
-          >
-            UK 6
-          </div>
-          <div
-            className="border-2 rounded-md text-center py-2.5 font-medium
-                   hover:bg-slate-300 
-                     cursor-pointer "
-          >
-            UK 6
-          </div>
-          <div
-            className="border-2 rounded-md text-center py-2.5 font-medium
-                   hover:bg-slate-300 
-                     cursor-pointer "
-          >
-            UK 6
-          </div>
-          <div
-            className="border-2 rounded-md text-center py-2.5 font-medium
-                   hover:bg-slate-300 
-                     cursor-pointer "
-          >
-            UK 6
-          </div>
-          <div
-            className="border-2 rounded-md text-center py-2.5 font-medium
-                   hover:bg-slate-300 
-                     cursor-pointer "
-          >
-            UK 6
-          </div>
+          {data.size.data.map((size, index) => (
+            <div
+              onClick={
+                size.number > 0 ? () => setSizeSelected(size.size) : () => {}
+              }
+              key={index}
+              className={`border-2 rounded-md text-center py-2.5 font-medium
+        hover:bg-slate-300 
+          cursor-pointer ${
+            size.number > 0
+              ? 'hover:border-black cursor-pointer'
+              : 'cursor-not-allowed disabled bg-black/[0.1] opacity-50'
+          } ${selectedSize === size.size ? 'border-black' : ''} `}
+            >
+              {size.size}
+            </div>
+          ))}
         </div>
         {/* Size end */}
 

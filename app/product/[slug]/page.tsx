@@ -1,30 +1,20 @@
+import ProductDetailClient from '@/app/components/ProductDetailClient';
 import ProductDetailRight from '@/app/components/ProductDetailRight';
 import ProductDetailsCarousel from '@/app/components/ProductDetailsCarousel';
 import RelatedProducts from '@/app/components/RelatedProducts';
 import Wrapper from '@/app/components/Wrapper';
+import axios from 'axios';
 import React from 'react';
 
-export default function ProductDetails() {
-  return (
-    <div className="w-full md:py-20">
-      <Wrapper className="">
-        <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
-          {/* Left column START */}
-          <div
-            className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full lg:mx-0
-"
-          >
-            <ProductDetailsCarousel />
-          </div>
-          {/* left column End */}
+export const revalidate = 10;
 
-          {/* right column start */}
-          <ProductDetailRight />
-          {/* right column end */}
-        </div>
+export default async function ProductDetails({ params }: { params: any }) {
+  var data;
 
-        <RelatedProducts />
-      </Wrapper>
-    </div>
-  );
+  await axios
+    .get(`http://localhost:4000/product/view/${params.slug}`)
+    .then((res) => {
+      data = res.data;
+    });
+  return <ProductDetailClient data={data} />;
 }

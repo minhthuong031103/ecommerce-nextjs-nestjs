@@ -8,20 +8,16 @@ const data = [
   { id: 4, name: 'Contact', url: '/contact' },
 ];
 
-const subMenuData = [
-  { id: 1, name: 'Jordan', doc_count: 11 },
-  { id: 2, name: 'Sneakers', doc_count: 8 },
-  { id: 3, name: 'Running shoes', doc_count: 64 },
-  { id: 4, name: 'Football shoes', doc_count: 107 },
-];
 export default function MenuMobile({
   showCatMenu,
   setShowcatMenu,
   setMobileMenu,
+  categories,
 }: {
   showCatMenu: boolean;
   setShowcatMenu: Function;
   setMobileMenu: Function;
+  categories: any;
 }) {
   return (
     <ul
@@ -49,11 +45,11 @@ export default function MenuMobile({
                     className="bg-black/[0.05] -mx-5 mt-4 -mb-4 
                   "
                   >
-                    {subMenuData.map((subMenu) => {
+                    {categories.map((category) => {
                       return (
                         <Link
-                          href={'/'}
-                          key={subMenu.id}
+                          href={`/category/${category.slug}`}
+                          key={category.slug}
                           onClick={() => {
                             setShowcatMenu(false);
                             setMobileMenu(false);
@@ -63,9 +59,9 @@ export default function MenuMobile({
                             className="py-4 px-8 border-t flex justify-between
                           "
                           >
-                            {subMenu.name}
+                            {category.name}
                             <span className="opacity-50 text-sm ">
-                              {subMenu.doc_count}
+                              {`(${category.Product.length})`}
                             </span>
                           </li>
                         </Link>

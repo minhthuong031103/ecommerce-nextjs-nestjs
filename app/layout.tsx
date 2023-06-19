@@ -7,6 +7,7 @@ import './globals.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Head from 'next/head';
+import HeaderWrap from './components/HeaderWrap';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -37,7 +38,7 @@ export default function RootLayout({
           className={`${montserrat.variable} font-mont 
        `}
         >
-          <Header />
+          <HeaderWrap />
           {children}
           <Footer />
         </body>

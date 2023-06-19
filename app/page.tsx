@@ -3,11 +3,24 @@ import { getProducts } from '@/graphql/getProducts.query';
 import HeroBanner from './components/HeroBanner';
 import Wrapper from './components/Wrapper';
 import ProductCard from './components/ProductCard';
+import axios from 'axios';
 
 export default async function Home() {
+  var data;
   // const client = getClient();
   // const { data, error, loading } = await client.query({ query: getProducts });
-
+  await axios.get('http://localhost:4000/product/all').then((res) => {
+    data = res.data;
+  });
+  // const res = await fetch('http://localhost:4000/product/all', {
+  //   method: 'GET',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  // });
+  // let kk = await res.json();
+  // console.log(kk);
+  //Nhu nay thi duoc!
   return (
     <main>
       <HeroBanner />
@@ -38,12 +51,11 @@ export default async function Home() {
         my-14 
         "
         >
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {data &&
+            data.map((product) => (
+              <ProductCard key={product?.slug} data={product} />
+            ))}
+          {!data && <div>Loading...</div>}
         </div>
         {/* 
         Product grid end */}

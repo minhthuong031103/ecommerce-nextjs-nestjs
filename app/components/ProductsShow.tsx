@@ -1,18 +1,14 @@
 'use client';
 
-import { Row, Col } from 'react-bootstrap';
-import ProductCard from './Product';
-import { Product } from '@/graphql/types';
-export default function ProductsShow({ data }: { data: any }) {
+import React from 'react';
+import ProductCard from './ProductCard';
+
+export default function ProductsShow({ products }) {
   return (
-    <>
-      <Row>
-        {data?.products.map((product: Product) => (
-          <Col key={product.id}>
-            <ProductCard product={product} />
-          </Col>
-        ))}
-      </Row>
-    </>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-14 px-5 md:px-0">
+      {products?.data?.map((product) => (
+        <ProductCard key={product?.id} data={product} />
+      ))}
+    </div>
   );
 }
