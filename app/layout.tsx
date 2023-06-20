@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css'; // Add this line
 
 import { Montserrat } from 'next/font/google';
 import { Providers } from '@/redux/provider';
-
+import { ApolloWrapper } from '@/lib/apollo-wrapper';
 import './globals.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -39,7 +39,8 @@ export default function RootLayout({
        `}
         >
           <HeaderWrap />
-          {children}
+          <ApolloWrapper>{children}</ApolloWrapper>
+
           <Footer />
         </body>
       </Providers>

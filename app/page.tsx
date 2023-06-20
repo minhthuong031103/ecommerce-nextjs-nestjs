@@ -4,23 +4,25 @@ import HeroBanner from './components/HeroBanner';
 import Wrapper from './components/Wrapper';
 import ProductCard from './components/ProductCard';
 import axios from 'axios';
+import Loader from './components/Loader';
 
 export default async function Home() {
-  var data;
   // const client = getClient();
   // const { data, error, loading } = await client.query({ query: getProducts });
-  await axios.get('http://localhost:4000/product/all').then((res) => {
-    data = res.data;
-  });
-  // const res = await fetch('http://localhost:4000/product/all', {
-  //   method: 'GET',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
+  // await axios.get('http://localhost:4000/product/all').then((res) => {
+  //   data = res.data;
   // });
-  // let kk = await res.json();
+  const res = await fetch('http://localhost:4000/product/all', {
+    next: { revalidate: 60 },
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  let data = await res.json();
   // console.log(kk);
   //Nhu nay thi duoc!
+  if (!data) return <Loader />;
   return (
     <main>
       <HeroBanner />

@@ -1,3 +1,4 @@
+import Loader from '@/app/components/Loader';
 import ProductDetailClient from '@/app/components/ProductDetailClient';
 import ProductDetailRight from '@/app/components/ProductDetailRight';
 import ProductDetailsCarousel from '@/app/components/ProductDetailsCarousel';
@@ -16,5 +17,6 @@ export default async function ProductDetails({ params }: { params: any }) {
     .then((res) => {
       data = res.data;
     });
+  if (!data) return <Loader />;
   return <ProductDetailClient data={data} />;
 }

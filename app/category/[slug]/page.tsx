@@ -1,14 +1,19 @@
+import Loader from '@/app/components/Loader';
 import ProductCard from '@/app/components/ProductCard';
 import Wrapper from '@/app/components/Wrapper';
 import axios from 'axios';
 import React from 'react';
 
 export default async function page() {
-  var data;
-  await axios.get('http://localhost:4000/product/category/1').then((res) => {
-    data = res.data;
+  const res = await fetch('http://localhost:4000/product/category/1', {
+    next: { revalidate: 60 },
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
-
+  let data = await res.json();
+  if (!data) return <Loader />;
   return (
     <div className="w-full md:py-20">
       <Wrapper className="">

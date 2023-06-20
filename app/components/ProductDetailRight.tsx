@@ -3,7 +3,9 @@
 import React from 'react';
 import { IoMdHeartEmpty } from 'react-icons/io';
 import { getDiscountedPricePercentage } from '../utils/helper';
+import ReactMarkdown from 'react-markdown';
 import numeral from 'numeral';
+
 export default function ProductDetailRight({ data }) {
   const [selectedSize, setSizeSelected] = React.useState(-1);
   return (
@@ -94,13 +96,8 @@ export default function ProductDetailRight({ data }) {
 
       <div>
         <div className="text-lg font-bold mb-5">Product Details</div>
-        <div className="text-md mb-5">
-          You've got the hops and the speed—lace up in shoes that enhance what
-          you bring to the court. The latest AJ is all about take-offs and
-          landings, with multiple Air units to get you off the ground. The upper
-          is made with strong, reinforced leno-weave fabric that'll keep you
-          contained and leave your game uncompromised. This low-top model is
-          designed for playing on outdoor courts.
+        <div className="markdown text-md mb-5">
+          <ReactMarkdown>{data.description}</ReactMarkdown>
         </div>
       </div>
     </div>

@@ -1,13 +1,16 @@
+'use client';
+
 import React from 'react';
 import Wrapper from '../components/Wrapper';
 import styles from './login.module.css';
 import LoginPanel from '../components/LoginPanel';
+import { gql } from '@apollo/client';
+
 export default function page() {
   return (
-    <div className="h-screen">
+    <div className="flex">
       <div
-        className="m-auto bg-slate-50 rounded-md w-3/5
-  h-3/4 grid lg:grid-cols-2 
+        className="m-auto bg-slate-50 rounded-md w-full grid lg:grid-cols-2 
   "
       >
         <div className={styles.imgStyle}>
@@ -16,7 +19,7 @@ export default function page() {
           <div className={styles.cloud_two}></div>
         </div>
         <div className="right flex flex-col justify-evenly ">
-          <div className="text-center py-10">
+          <div className=" py-10">
             <LoginPanel />
           </div>
         </div>
