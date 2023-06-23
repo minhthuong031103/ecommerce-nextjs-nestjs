@@ -1,13 +1,32 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { IoMdHeartEmpty } from 'react-icons/io';
 import { getDiscountedPricePercentage } from '../utils/helper';
 import ReactMarkdown from 'react-markdown';
 import numeral from 'numeral';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../redux/slice/cartSlice';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function ProductDetailRight({ data }) {
-  const [selectedSize, setSizeSelected] = React.useState(-1);
+  const dispatch = useDispatch();
+  const [selectedSize, setSizeSelected] = useState(null);
+  const [showError, setShowError] = useState(false);
+
+  const notify = () => {
+    toast.success('Success. Check your cart!', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    });
+  };
   return (
     <div className="flex-[1] py-3">
       {/* Product Title */}
@@ -49,11 +68,16 @@ export default function ProductDetailRight({ data }) {
         {/* Heading */}
 
         {/* Size start */}
-        <div className="grid grid-cols-3 gap-2">
+        <div id="sizesGrid" className="grid grid-cols-3 gap-2">
           {data.size.data.map((size, index) => (
             <div
               onClick={
-                size.number > 0 ? () => setSizeSelected(size.size) : () => {}
+                size.number > 0
+                  ? () => {
+                      setSizeSelected(size.size);
+                      setShowError(false);
+                    }
+                  : () => {}
               }
               key={index}
               className={`border-2 rounded-md text-center py-2.5 font-medium
@@ -71,7 +95,9 @@ export default function ProductDetailRight({ data }) {
         {/* Size end */}
 
         {/* Show error */}
-        <div className="text-red-600 mt-1">Size selection is required</div>
+        {showError && (
+          <div className="text-red-600 mt-1">Size selection is required</div>
+        )}
         {/* Show error */}
       </div>
 
@@ -81,6 +107,24 @@ export default function ProductDetailRight({ data }) {
         className="w-full py-4 rounded-full bg-black text-white text-lg
                     font-medium transition-transform active:scale-95 mb-3 hover:opacity-75
                     "
+        onClick={() => {
+          if (!selectedSize) {
+            setShowError(true);
+            document.getElementById('sizesGrid').scrollIntoView({
+              block: 'center',
+              behavior: 'smooth',
+            });
+          } else {
+            dispatch(
+              addToCart({
+                ...data,
+                selectedSize,
+                oneQuantityPrice: data.price,
+              })
+            );
+            notify();
+          }
+        }}
       >
         Add to cart
       </button>

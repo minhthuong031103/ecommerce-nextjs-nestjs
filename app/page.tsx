@@ -12,7 +12,7 @@ export default async function Home() {
   // await axios.get('http://localhost:4000/product/all').then((res) => {
   //   data = res.data;
   // });
-  const res = await fetch('http://localhost:4000/product/all', {
+  const res = await fetch('https://shoe-store-le7s.onrender.com/product/all', {
     next: { revalidate: 60 },
     method: 'GET',
     headers: {

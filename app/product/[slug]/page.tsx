@@ -13,7 +13,7 @@ export default async function ProductDetails({ params }: { params: any }) {
   var data;
 
   await axios
-    .get(`http://localhost:4000/product/view/${params.slug}`)
+    .get(`https://shoe-store-le7s.onrender.com/product/view/${params.slug}`)
     .then((res) => {
       data = res.data;
     });

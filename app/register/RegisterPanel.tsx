@@ -11,33 +11,33 @@ import { useFormik } from 'formik';
 import toast, { Toaster } from 'react-hot-toast';
 import { gql, useMutation } from '@apollo/client';
 export default function RegisterPanel() {
-  const query = gql`
-    mutation SignUp($input: SignUpInput!) {
-      signup(signUpInput: $input) {
-        message
-      }
-    }
-  `;
+  // const query = gql`
+  //   mutation SignUp($input: SignUpInput!) {
+  //     signup(signUpInput: $input) {
+  //       message
+  //     }
+  //   }
+  // `;
 
-  const [register] = useMutation(query, {
-    onCompleted(data) {
-      console.log(data);
-      if (data.signup.message === 'User created successfully') {
-        toast.success('Đăng ký thành công');
-      } else if (data.signup.message === 'User creation failed') {
-        toast.error('Đăng ký thất bại, vui lòng thử lại');
-      }
-    },
-    onError(error) {
-      console.log(error);
-      if (error.message === 'Phone number already exists') {
-        toast.error('Số điện thoại đã tồn tại');
-      }
-      if (error.message === 'Email already exists') {
-        toast.error('Email đã tồn tại');
-      }
-    },
-  });
+  // const [register] = useMutation(query, {
+  //   onCompleted(data) {
+  //     console.log(data);
+  //     if (data.signup.message === 'User created successfully') {
+  //       toast.success('Đăng ký thành công');
+  //     } else if (data.signup.message === 'User creation failed') {
+  //       toast.error('Đăng ký thất bại, vui lòng thử lại');
+  //     }
+  //   },
+  //   onError(error) {
+  //     console.log(error);
+  //     if (error.message === 'Phone number already exists') {
+  //       toast.error('Số điện thoại đã tồn tại');
+  //     }
+  //     if (error.message === 'Email already exists') {
+  //       toast.error('Email đã tồn tại');
+  //     }
+  //   },
+  // });
 
   const [show, setShow] = useState(false);
   const formik = useFormik({
@@ -73,10 +73,31 @@ export default function RegisterPanel() {
         toast.error('Mật khẩu không khớp');
         return;
       }
-      console.log(values);
+
       const { confirmPassword, ...rest } = values;
       const toastId = toast.loading('Đang đăng ký');
-      await register({ variables: { input: rest } });
+      // await register({ variables: { input: rest } });
+      const res = await fetch(
+        'https://shoe-store-le7s.onrender.com/auth/signup',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+          body: JSON.stringify(rest),
+        }
+      );
+      const data = await res.json();
+      if (data.message === 'User created successfully') {
+        toast.success('Đăng ký thành công');
+      } else if (data.message === 'User creation failed') {
+        toast.error('Đăng ký thất bại, vui lòng thử lại');
+      } else if (data.message === 'Email already exists') {
+        toast.error('Email đã tồn tại');
+      } else if (data.message === 'Phone number already exists') {
+        toast.error('Số điện thoại đã tồn tại');
+      }
       toast.dismiss(toastId);
     },
   });

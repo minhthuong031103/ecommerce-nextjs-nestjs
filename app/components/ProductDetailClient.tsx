@@ -3,10 +3,12 @@ import Wrapper from './Wrapper';
 import ProductDetailsCarousel from './ProductDetailsCarousel';
 import RelatedProducts from './RelatedProducts';
 import ProductDetailRight from './ProductDetailRight';
+import { ToastContainer } from 'react-toastify';
 
 export default function ProductDetailClient({ data }) {
   return (
     <div className="w-full md:py-20">
+      <ToastContainer />
       <Wrapper className="">
         <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
           {/* Left column START */}

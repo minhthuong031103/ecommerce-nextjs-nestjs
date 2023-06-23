@@ -5,13 +5,16 @@ import axios from 'axios';
 import React from 'react';
 
 export default async function page() {
-  const res = await fetch('http://localhost:4000/product/category/1', {
-    next: { revalidate: 60 },
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const res = await fetch(
+    'https://shoe-store-le7s.onrender.com/product/category/1',
+    {
+      next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
   let data = await res.json();
   if (!data) return <Loader />;
   return (

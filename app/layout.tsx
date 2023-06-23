@@ -1,13 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.css'; // Add this line
 
 import { Montserrat } from 'next/font/google';
-import { Providers } from '@/redux/provider';
+
 import { ApolloWrapper } from '@/lib/apollo-wrapper';
 import './globals.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Head from 'next/head';
 import HeaderWrap from './components/HeaderWrap';
+import { ReactProviders } from './redux/Provider';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -33,17 +34,17 @@ export default function RootLayout({
         />
       </head>
 
-      <Providers>
+      <ReactProviders>
         <body
           className={`${montserrat.variable} font-mont 
        `}
         >
           <HeaderWrap />
-          <ApolloWrapper>{children}</ApolloWrapper>
-
+          {/* <ApolloWrapper>{children}</ApolloWrapper> */}
+          {children}
           <Footer />
         </body>
-      </Providers>
+      </ReactProviders>
     </html>
   );
 }

@@ -1,12 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Wrapper from '../components/Wrapper';
 import styles from './login.module.css';
 import LoginPanel from '../components/LoginPanel';
 import { gql } from '@apollo/client';
-
-export default function page() {
+import { redirect } from 'next/navigation';
+if (typeof window !== 'undefined') {
+  const token = localStorage.getItem('accessToken');
+  if (token) redirect('/');
+}
+export default function Page() {
   return (
     <div className="flex">
       <div

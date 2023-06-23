@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../login/form.module.css';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useFormik } from 'formik';
 import { HiAtSymbol, HiFingerPrint } from 'react-icons/hi';
@@ -10,6 +11,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr';
 import { gql, useMutation, useQuery } from '@apollo/client';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { redirect } from 'next/navigation';
 const query = gql`
   mutation SignIn($input: SignInInput!) {
     signin(signInInput: $input) {
@@ -23,18 +26,18 @@ const query = gql`
 `;
 
 export default function LoginPanel() {
-  const [submit, { data }] = useMutation(query, {
-    async onCompleted(data) {
-      console.log(data);
-      toast.success('Đăng nhập thành công');
-    },
-    async onError(error) {
-      console.log(error.message);
-      if (error.message === 'Invalid user')
-        toast.error('Tài khoản hoặc mật khẩu không chính xác');
-      else toast.error('Có lỗi xảy ra, vui lòng thử lại');
-    },
-  });
+  // const [submit, { data }] = useMutation(query, {
+  //   async onCompleted(data) {
+  //     console.log(data);
+  //     toast.success('Đăng nhập thành công');
+  //   },
+  //   async onError(error) {
+  //     console.log(error.message);
+  //     if (error.message === 'Invalid user')
+  //       toast.error('Tài khoản hoặc mật khẩu không chính xác');
+  //     else toast.error('Có lỗi xảy ra, vui lòng thử lại');
+  //   },
+  // });
 
   const formik = useFormik({
     initialValues: {
@@ -45,18 +48,42 @@ export default function LoginPanel() {
       onSubmit(values);
     },
   });
+  // async function onSubmit(values) {
+  //   console.log(values);
+  //   const toastId = toast.loading('Đang xử lý...');
+  //   await submit({
+  //     variables: {
+  //       input: {
+  //         email: values.email,
+  //         password: values.password,
+  //       },
+  //     },
+  //   });
+
+  //   toast.dismiss(toastId);
+  // }
   async function onSubmit(values) {
     console.log(values);
     const toastId = toast.loading('Đang xử lý...');
-    await submit({
-      variables: {
-        input: {
-          email: values.email,
-          password: values.password,
+    const res = await fetch(
+      'https://shoe-store-le7s.onrender.com/auth/signin',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      },
-    });
-
+        body: JSON.stringify(values),
+      }
+    );
+    let data = await res.json();
+    if (data.message === 'Invalid user')
+      toast.error('Tài khoản hoặc mật khẩu không chính xác');
+    else {
+      toast.success('Đăng nhập thành công');
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
+    }
+    console.log(data);
     toast.dismiss(toastId);
   }
   const [show, setShow] = useState(false);
@@ -127,3 +154,13 @@ export default function LoginPanel() {
     </>
   );
 }
+type Repo = {
+  redirect: {
+    destination: string;
+    permanent: boolean;
+  };
+  session: {
+    accessToken: string;
+    refreshToken: string;
+  };
+};
