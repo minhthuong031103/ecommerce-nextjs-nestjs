@@ -47,7 +47,7 @@ export default function Menu({
                   min-w-[250px] px-1 py-1 text-black shadow-lg 
                   "
                   >
-                    {categories.map((category) => {
+                    {categories.map((category: any) => {
                       return (
                         <Link
                           href={`/category/${category.slug}`}

@@ -10,7 +10,7 @@ import { addToCart } from '../redux/slice/cartSlice';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-export default function ProductDetailRight({ data }) {
+export default function ProductDetailRight({ data }: { data: any }) {
   const dispatch = useDispatch();
   const [selectedSize, setSizeSelected] = useState(null);
   const [showError, setShowError] = useState(false);
@@ -69,7 +69,7 @@ export default function ProductDetailRight({ data }) {
 
         {/* Size start */}
         <div id="sizesGrid" className="grid grid-cols-3 gap-2">
-          {data.size.data.map((size, index) => (
+          {data.size.data.map((size: any, index: any) => (
             <div
               onClick={
                 size.number > 0
@@ -110,7 +110,7 @@ export default function ProductDetailRight({ data }) {
         onClick={() => {
           if (!selectedSize) {
             setShowError(true);
-            document.getElementById('sizesGrid').scrollIntoView({
+            document.getElementById('sizesGrid')?.scrollIntoView({
               block: 'center',
               behavior: 'smooth',
             });

@@ -13,7 +13,9 @@ export default async function ProductDetails({ params }: { params: any }) {
   var data;
 
   await axios
-    .get(`https://shoe-store-le7s.onrender.com/product/view/${params.slug}`)
+    .get(
+      `https://ecommerce-nestjs-backend-production-5fc3.up.railway.app/product/view/${params.slug}`
+    )
     .then((res) => {
       data = res.data;
     });

@@ -78,7 +78,7 @@ export default function RegisterPanel() {
       const toastId = toast.loading('Đang đăng ký');
       // await register({ variables: { input: rest } });
       const res = await fetch(
-        'https://shoe-store-le7s.onrender.com/auth/signup',
+        'https://ecommerce-nestjs-backend-production-5fc3.up.railway.app/auth/signup',
         {
           method: 'POST',
           headers: {

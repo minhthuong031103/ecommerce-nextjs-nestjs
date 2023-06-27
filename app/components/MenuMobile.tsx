@@ -45,7 +45,7 @@ export default function MenuMobile({
                     className="bg-black/[0.05] -mx-5 mt-4 -mb-4 
                   "
                   >
-                    {categories.map((category) => {
+                    {categories.map((category: any) => {
                       return (
                         <Link
                           href={`/category/${category.slug}`}

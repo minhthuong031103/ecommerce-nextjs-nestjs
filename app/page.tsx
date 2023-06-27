@@ -12,13 +12,16 @@ export default async function Home() {
   // await axios.get('http://localhost:4000/product/all').then((res) => {
   //   data = res.data;
   // });
-  const res = await fetch('https://shoe-store-le7s.onrender.com/product/all', {
-    next: { revalidate: 60 },
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const res = await fetch(
+    'https://ecommerce-nestjs-backend-production-5fc3.up.railway.app/product/all',
+    {
+      next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
   let data = await res.json();
   // console.log(kk);
   //Nhu nay thi duoc!
@@ -54,7 +57,7 @@ export default async function Home() {
         "
         >
           {data &&
-            data.map((product) => (
+            data.map((product: any) => (
               <ProductCard key={product?.slug} data={product} />
             ))}
           {!data && <div>Loading...</div>}

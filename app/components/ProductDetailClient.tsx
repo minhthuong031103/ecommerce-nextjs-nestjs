@@ -5,7 +5,7 @@ import RelatedProducts from './RelatedProducts';
 import ProductDetailRight from './ProductDetailRight';
 import { ToastContainer } from 'react-toastify';
 
-export default function ProductDetailClient({ data }) {
+export default function ProductDetailClient({ data }: { data: any }) {
   return (
     <div className="w-full md:py-20">
       <ToastContainer />

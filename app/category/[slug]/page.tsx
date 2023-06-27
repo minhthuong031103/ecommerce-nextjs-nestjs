@@ -6,7 +6,7 @@ import React from 'react';
 
 export default async function page() {
   const res = await fetch(
-    'https://shoe-store-le7s.onrender.com/product/category/1',
+    'https://ecommerce-nestjs-backend-production-5fc3.up.railway.app/product/category/1',
     {
       next: { revalidate: 60 },
       method: 'GET',
@@ -36,7 +36,7 @@ export default async function page() {
         "
         >
           {' '}
-          {data.Product.map((product) => (
+          {data.Product.map((product: any) => (
             <ProductCard key={product?.slug} data={product} />
           ))}
         </div>

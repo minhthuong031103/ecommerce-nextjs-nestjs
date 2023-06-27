@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 export default function Page() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state: any) => state.cart);
 
   // useEffect(() => {
   //   async function fetchData() {
@@ -32,7 +32,7 @@ export default function Page() {
   //   fetchData();
   // }, []);
   const subTotal = useMemo(() => {
-    return cartItems.reduce((total, val) => total + val.price, 0);
+    return cartItems.reduce((total: any, val: any) => total + val.price, 0);
   }, [cartItems]);
   return (
     <div className="w-full md:py-20">
@@ -52,7 +52,7 @@ export default function Page() {
                 <div className="flex flex-col lg:flex-row gap-12 py-10">
                   <div className="flex-[2]">
                     <div className="text-lg font-bold ">Cart Items</div>
-                    {cartItems.map((item) => (
+                    {cartItems.map((item: any) => (
                       <CartItem key={item.id} data={item} />
                     ))}
                   </div>

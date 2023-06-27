@@ -4,7 +4,7 @@ import React from 'react';
 import productImage from '../../public/assets/product-1.webp';
 import { getDiscountedPricePercentage } from '../utils/helper';
 import numeral from 'numeral';
-export default function ProductCard({ data }) {
+export default function ProductCard({ data }: { data: any }) {
   return (
     <Link
       className="transform overflow-hidden bg-white duration-200 

@@ -13,7 +13,7 @@ import { BiMenuAltRight } from 'react-icons/bi';
 import { VscChromeClose } from 'react-icons/vsc';
 import MenuMobile from './MenuMobile';
 
-export default function Header({ data }) {
+export default function Header({ data }: { data: any }) {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
   const [show, setShow] = useState('translate-y-0');

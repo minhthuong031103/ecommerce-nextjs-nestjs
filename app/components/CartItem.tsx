@@ -6,10 +6,10 @@ import { useDispatch } from 'react-redux';
 import Image from 'next/image';
 import numeral from 'numeral';
 import { updateCart } from '../redux/slice/cartSlice';
-export default async function CartItem({ data }) {
+export default async function CartItem({ data }: { data: any }) {
   const dispatch = useDispatch();
 
-  const updateCartItem = (e, key) => {
+  const updateCartItem = (e: any, key: any) => {
     let payload = {
       key,
       value: key === 'quantity' ? parseInt(e.target.value) : e.target.value,

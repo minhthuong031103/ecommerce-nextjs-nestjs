@@ -4,7 +4,7 @@ import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProductCard from './ProductCard';
-export default function RelatedProducts({ data }) {
+export default function RelatedProducts({ data }: { data: any }) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },

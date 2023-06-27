@@ -21,7 +21,7 @@ export default function ProductDetailsCarousel({ data }: { data: any }) {
         thumbWidth={60}
         className="productCarousel"
       >
-        {data.Thumbnail.map((item) => {
+        {data.Thumbnail.map((item: any) => {
           return (
             <div key={item.id}>
               <img src={item.url} alt="Picture of the author" />
